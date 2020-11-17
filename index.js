@@ -3,7 +3,7 @@ const superagent = require("superagent");
 const config = JSON.parse(fs.readFileSync("config.json", "utf8"));
 const board = require("./board.js");
 
-var message = "";
+var message = config.message ?? "";
 
 async function newMessage(embed) {
   let result = await superagent
@@ -25,12 +25,14 @@ async function doThing() {
         .send(embed)
         .then((x) => x.body);
       message = result.id;
+      console.log(`updated message (${message})`);
     } catch {
       let result = await superagent
         .delete(`${config.webhook}/messages/${message}`)
         .query({ wait: true })
         .send(embed)
         .then((x) => x.body);
+      console.log(`deleted message (${message})`);
       newMessage(embed);
     }
   } else {

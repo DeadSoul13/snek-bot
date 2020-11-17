@@ -1,4 +1,5 @@
 {
     "webhook": "https://discord.com/api/webhooks/no/steal",
-    "delay": 60
+    "delay": 60,
+    "message": "778307049813442620"
 }
