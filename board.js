@@ -17,8 +17,10 @@ function direction(board) {
 }
 
 function determine(likes, rts, dir) {
-  let total = likes + rts
-  let tying = Math.abs(likes - rts) <= (total * 0.05);
+  let total = likes + rts;
+  // polymars helped me confirm this line of code thanks man
+  let tying = rts > likes - likes / 20 && rts < likes + likes / 20;
+
   if (!tying) {
     if (rts > likes) {
       return dir ? "Going left" : "Going up";
