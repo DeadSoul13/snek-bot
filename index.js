@@ -38,5 +38,5 @@ async function doThing() {
   }
 }
 
-const timer = setInterval(doThing, 1000 * 60 * 1);
+const timer = setInterval(doThing, 1000 * config.delay ?? 60);
 doThing();
