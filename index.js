@@ -12,20 +12,25 @@ async function newMessage(embed) {
     .send(embed)
     .then((x) => x.body);
   message = result.id;
-  console.log(`sent new message (${message})`);
 }
 
 async function doThing() {
   let embed = await board();
-  try {
-    let result = await superagent
-      .delete(`${config.webhook}/messages/${message}`)
-      .send(embed)
-      .then((x) => x.body);
-  } catch (err) {
-    console.error(err);
+  if (message !== "") {
+    try {
+      let result = await superagent
+        .patch(`${config.webhook}/messages/${message}`)
+        .query({ wait: true })
+        .send(embed)
+        .then((x) => x.body);
+      message = result.id;
+    } catch {
+      newMessage(embed);
+    }
+  } else {
+    newMessage(embed);
   }
-  newMessage(embed);
+  console.log("updated");
 }
 
 const timer = setInterval(doThing, 1000 * 60 * 1);
