@@ -12,6 +12,7 @@ async function newMessage(embed) {
     .send(embed)
     .then((x) => x.body);
   message = result.id;
+  console.log(`sent new message (${message})`);
 }
 
 async function doThing() {
@@ -35,7 +36,6 @@ async function doThing() {
   } else {
     newMessage(embed);
   }
-  console.log("updated");
 }
 
 const timer = setInterval(doThing, 1000 * 60 * 1);
