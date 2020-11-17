@@ -25,6 +25,11 @@ async function doThing() {
         .then((x) => x.body);
       message = result.id;
     } catch {
+      let result = await superagent
+        .delete(`${config.webhook}/messages/${message}`)
+        .query({ wait: true })
+        .send(embed)
+        .then((x) => x.body);
       newMessage(embed);
     }
   } else {
