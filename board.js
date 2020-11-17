@@ -42,6 +42,7 @@ function snowflake(flake) {
 }
 
 function buildDesc(gameboard, post, dir) {
+  let dirstr = determine(post.favorite_count, post.retweet_count, dir);
   let rtdir = dir ? ":arrow_left:" : ":arrow_up:";
   let likedir = dir ? ":arrow_right:" : ":arrow_down:";
   let max = post.retweet_count + post.favorite_count;
@@ -50,14 +51,14 @@ function buildDesc(gameboard, post, dir) {
   let final = "";
   final = final += `${discordShortcodes(gameboard)}\n\n`;
   final = final += `:repeat: ${rtdir} ${post.retweet_count} (${rtpercent})\n`;
-  final = final += `:heart: ${likedir} ${post.favorite_count} (${likepercent})`;
+  final = final += `:heart: ${likedir} ${post.favorite_count} (${likepercent})\n`;
+  final = final += dirstr
   return final;
 }
 
 async function getInfo() {
   let post = await tweet();
   let dir = direction(post.text);
-  let dirstr = determine(post.favorite_count, post.retweet_count, dir);
   // this shithole is to just trim the gameboard because i didnt want to write another regex
   let gameboard = post.text
     .replace(scoreRegex, "")
@@ -76,7 +77,7 @@ async function getInfo() {
         description: desc,
         color: 14495300,
         footer: {
-          text: `${dirstr} - New post in ${diff} minutes`,
+          text: `New post in ${diff} minutes`,
         },
         timestamp: snow.toISOString(),
       },
