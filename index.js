@@ -3,7 +3,7 @@ const superagent = require("superagent");
 const config = JSON.parse(fs.readFileSync("config.json", "utf8"));
 const board = require("./board.js");
 
-var message = config.message ?? "";
+let message = config.message ?? "";
 
 async function newMessage(embed) {
   let result = await superagent
