@@ -8,6 +8,7 @@ function discordShortcodes(board) {
   board = board.replace(/\uD83D\uDE33/g, ":flushed:"); // normal
   board = board.replace(/\uD83D\uDE33/g, ":weary:"); // eaten apple
   board = board.replace(/\uD83D\uDE35/g, ":dizzy_face:"); // died
+  board = board.replace(/\uD83D\uDE14/g, ":pensive"); // no apple?
   return board;
 }
 
