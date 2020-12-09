@@ -4,6 +4,7 @@ const scoreRegex = /^Score: [0-9]+\nBest: [0-9]+\n\n/;
 function discordShortcodes(board) {
   board = board.replace(/\u2B1B/g, ":black_large_square:"); // void
   board = board.replace(/\uD83D\uDFE8/g, ":yellow_square:"); // tail
+  board = board.replace(/\uD83D\uDFE1/g, ":yellow_circle:"); // last end of tail????
   board = board.replace(/\uD83C\uDF4E/g, ":apple:"); // apple
   board = board.replace(/\uD83D\uDE33/g, ":flushed:"); // normal
   board = board.replace(/\uD83D\uDE33/g, ":weary:"); // eaten apple
@@ -64,7 +65,7 @@ async function getInfo() {
   let gameboard = post.text
     .replace(scoreRegex, "")
     .split("\n")
-    .slice(0, 7)
+    .slice(0, 5)
     .join("\n");
   let desc = buildDesc(gameboard, post, dir);
   let snow = snowflake(post.id);
