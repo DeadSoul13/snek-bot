@@ -65,7 +65,7 @@ async function getInfo() {
   let gameboard = post.text
     .replace(scoreRegex, "")
     .split("\n")
-    .slice(0, 5)
+    .slice(0, 7)
     .join("\n");
   let desc = buildDesc(gameboard, post, dir);
   let snow = snowflake(post.id);
