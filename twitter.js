@@ -20,7 +20,7 @@ async function getRecentPost() {
     let token = await getBearer();
     let data = await superagent
       .get(
-        `https://api.twitter.com/1.1/statuses/user_timeline.json?user_id=1311639359456776193&count=1`
+        `https://api.twitter.com/1.1/statuses/user_timeline.json?user_id=1311639359456776193&count=1&tweet_mode=extended`
       )
       .set("Authorization", `Bearer ${token}`)
       .set(

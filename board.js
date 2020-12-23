@@ -60,9 +60,9 @@ function buildDesc(gameboard, post, dir) {
 
 async function getInfo() {
   let post = await tweet();
-  let dir = direction(post.text);
+  let dir = direction(post.full_text);
   // this shithole is to just trim the gameboard because i didnt want to write another regex
-  let gameboard = post.text
+  let gameboard = post.full_text
     .replace(scoreRegex, "")
     .split("\n")
     .slice(0, 10)
@@ -74,7 +74,7 @@ async function getInfo() {
   return {
     embeds: [
       {
-        title: post.text.match(/^Score: [0-9]+/)[0],
+        title: post.full_text.match(/^Score: [0-9]+/)[0],
         url: `https://twitter.com/SnakeGameBot/status/${post.id_str}`,
         description: desc,
         color: 14495300,
