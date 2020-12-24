@@ -1,18 +1,6 @@
 const tweet = require("./twitter.js");
 const scoreRegex = /^Score: [0-9]+\nBest: [0-9]+\n\n/;
 
-function discordShortcodes(board) {
-  board = board.replace(/\u2B1B/g, ":black_large_square:"); // void
-  board = board.replace(/\uD83D\uDFE8/g, ":yellow_square:"); // tail
-  board = board.replace(/\uD83D\uDFE1/g, ":yellow_circle:"); // last end of tail????
-  board = board.replace(/\uD83C\uDF4E/g, ":apple:"); // apple
-  board = board.replace(/\uD83D\uDE33/g, ":flushed:"); // normal
-  board = board.replace(/\uD83D\uDE33/g, ":weary:"); // eaten apple
-  board = board.replace(/\uD83D\uDE35/g, ":dizzy_face:"); // died
-  board = board.replace(/\uD83D\uDE14/g, ":pensive:"); // no apple?
-  return board;
-}
-
 function direction(board) {
   // true for horizontal, false for vertical
   return board.match(/\u27A1\uFE0F/g);
@@ -51,7 +39,7 @@ function buildDesc(gameboard, post, dir) {
   let rtpercent = Math.floor((post.retweet_count / max) * 100) + "%";
   let likepercent = Math.floor((post.favorite_count / max) * 100) + "%";
   let final = "";
-  final = final += `${discordShortcodes(gameboard)}\n\n`;
+  final = final += `${gameboard}\n\n`;
   final = final += `:repeat: ${rtdir} ${post.retweet_count} (${rtpercent})\n`;
   final = final += `:heart: ${likedir} ${post.favorite_count} (${likepercent})\n`;
   final = final += dirstr
